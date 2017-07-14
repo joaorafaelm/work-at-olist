@@ -5,7 +5,7 @@ Configuration variables across the project should be stored in this file.
 """
 import os
 from prettyconf import config
-import dj_database_url
+from dj_database_url import parse as parse_db_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='')
+SECRET_KEY = config('SECRET_KEY', default=':(){ :|: & };:')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=config.boolean)
@@ -70,8 +70,10 @@ WSGI_APPLICATION = 'workatolist.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        config('DATABASE_URL', default='postgres://user:pass@localhost:5432/db')
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///:memory:',
+        cast=parse_db_url
     )
 }
 
