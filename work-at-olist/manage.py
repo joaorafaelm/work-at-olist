@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+"""Base manage.py file of the project."""
+# !/usr/bin/env python
 import os
 import sys
 
