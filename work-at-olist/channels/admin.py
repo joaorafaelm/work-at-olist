@@ -1,3 +1,5 @@
-from django.contrib import admin
+"""Admins models are defined in this file.
 
-# Register your models here.
+For more info: https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
+
+"""
