@@ -46,16 +46,9 @@ class Command(BaseCommand):
             parent_node = None
 
             for name in map(str.strip, line.get('Category', '').split('/')):
-                reference = '-'.join(
-                    ([parent_node.reference] if parent_node else []) + [name]
-                )
-
                 # noinspection PyUnresolvedReferences
                 parent_node, created = Category.objects.get_or_create(
                     channel=channel,
                     parent=parent_node,
-                    name=name,
-                    defaults={
-                        'reference': reference
-                    }
+                    name=name
                 )
