@@ -6,6 +6,7 @@ All models of this module should be defined here.
 
 import uuid
 
+from channels.utils import Attrgetter
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -20,9 +21,11 @@ class BaseModel(models.Model):
     Correctly truncates the field to the max_length of the slug field.
 
     The following attributes can be overridden on a per model basis:
-    * value_field_name - the value to slugify, default 'name'
+    * value_field_name - the field to slugify, it can be a tuple containing
+                         multiple fields, default ('name',).
     * slug_field_name - the field to store the slugified value in,
                         default 'reference'.
+    * slug_prefix - the field name which will be the prefix of the slug.
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -33,15 +36,32 @@ class BaseModel(models.Model):
     # noinspection PyUnresolvedReferences
     def save(self, *args, **kwargs):
         """Auto creates an slugified reference based on another attribute."""
-        value_field_name = getattr(self, 'value_field_name', 'name')
+        value_field_name = getattr(self, 'value_field_name', ('name',))
         slug_field_name = getattr(self, 'slug_field_name', 'reference')
+        slug_prefix = getattr(self, 'slug_prefix', None)
 
         # Retrieve the field where the slug will be stored
         slug_field = self._meta.get_field(slug_field_name)
         slug_len = slug_field.max_length
 
-        # Slugify the field and make sure it is within the allowed length
-        slug = slugify(getattr(self, value_field_name))
+        # Get list of fields to create slug
+        slug_list = Attrgetter(*value_field_name)(self)
+
+        if isinstance(slug_list, tuple):
+            slug_list = list(map(str, slug_list))
+        else:
+            slug_list = [slug_list]
+
+        # Add prefix if it hasnt been added already
+        if slug_prefix:
+            slug_prefix_value = Attrgetter(slug_prefix)(self)
+            if not slug_list[0].startswith(slug_prefix_value):
+                slug_list.insert(0, slug_prefix_value + '-')
+
+        slug_list = list(filter(None, slug_list))
+
+        # Slugify the field
+        slug = slugify('-'.join(slug_list))
 
         # Set the slug attribute value
         setattr(self, slug_field.attname, slug[:slug_len])
@@ -104,9 +124,8 @@ class Category(BaseModel):
         verbose_name=_('Parent')
     )
 
-    reference = models.SlugField(_('Reference'), max_length=100)
-
-    value_field_name = 'reference'
+    slug_prefix = 'channel.reference'
+    value_field_name = ('parent.reference', 'name',)
 
     class Meta:
         """Django meta class options.
