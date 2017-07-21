@@ -31,7 +31,7 @@ class Command(BaseCommand):
         )
 
     @transaction.atomic
-    def handle(self, *args, **options):
+    def handle(self, **options):
         """Create the channel entry and its categories."""
         channel_name = options.get('channel_name')
         csv_file = options.get('csv_file')
