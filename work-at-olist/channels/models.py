@@ -10,6 +10,7 @@ from channels.utils import Attrgetter
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class BaseModel(models.Model):
@@ -101,7 +102,7 @@ class Channel(BaseModel):
         return self.name
 
 
-class Category(BaseModel):
+class Category(BaseModel, MPTTModel):
     """Category model.
 
     All published products need to be categorized
@@ -116,7 +117,7 @@ class Category(BaseModel):
         verbose_name=_('Channel')
     )
 
-    parent = models.ForeignKey(
+    parent = TreeForeignKey(
         'self',
         related_name='children',
         blank=True,
