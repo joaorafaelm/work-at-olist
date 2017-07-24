@@ -59,7 +59,7 @@ $ python work-at-olist/manage.py importcategories <marketplace_name> <csv_file>
 ##### Listing all channels
 This endpoint will list all channels registered.
 ~~~~
-GET /api/v1/channels/
+GET /api/v1/channel/
 ~~~~
 ###### Example response
 ~~~~
@@ -79,7 +79,7 @@ GET /api/v1/channels/
 ##### Detail of a channel
 This endpoint will show the details for a specific channel (categories and subcategories).
 ~~~~
-GET /api/v1/channels/{channel_reference}/
+GET /api/v1/channel/{channel_reference}/
 ~~~~
 ***Channel_reference** is the identifier for the channel.*
 ###### Example response
@@ -108,7 +108,7 @@ GET /api/v1/channels/{channel_reference}/
 ##### Listing all categories
 This endpoint will list all categories registered.
 ~~~~
-GET /api/v1/categories/
+GET /api/v1/category/
 ~~~~
 ###### Example response
 ~~~~
