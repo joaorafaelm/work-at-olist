@@ -85,6 +85,7 @@ class Channel(BaseModel):
     """
 
     name = models.CharField(_('Name'), max_length=256, unique=True)
+    objects = models.Manager()
 
     class Meta:
         """Django meta class options.

@@ -36,7 +36,6 @@ class Command(BaseCommand):
         channel_name = options.get('channel_name')
         csv_file = options.get('csv_file')
 
-        # noinspection PyUnresolvedReferences
         channel, created = Channel.objects.get_or_create(
             reference=slugify(channel_name),
             defaults={'name': channel_name}
@@ -46,7 +45,6 @@ class Command(BaseCommand):
             parent_node = None
 
             for name in map(str.strip, line.get('Category', '').split('/')):
-                # noinspection PyUnresolvedReferences
                 parent_node, created = Category.objects.get_or_create(
                     channel=channel,
                     parent=parent_node,
