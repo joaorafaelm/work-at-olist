@@ -12,8 +12,8 @@ This is my solution for the test proposed [here](https://github.com/olist/work-a
 * Virtualenv
 -------------
 #### Environment
+This project was developed using Pycharm, Vim and Atom Editor, running on macOS Sierra 10.12.
 
-This project was developed using PyCharm, VIM and Atom Editor, running on macOS Sierra 10.12.
 -------------
 #### Getting Set Up
 Clone this project and create the virtual environment:
