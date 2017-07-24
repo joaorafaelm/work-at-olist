@@ -10,3 +10,4 @@ tmp
 .tox
 .olistvenv
 .cache
+work-at-olist/staticfiles/
