@@ -1,5 +1,4 @@
 # Work at Olist
--------------
 [![Build Status](https://travis-ci.org/joaorafaelm/work-at-olist.svg?branch=master)](https://travis-ci.org/joaorafaelm/work-at-olist) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/358e51e3ce08402eb9e906ab74dab7d7)](https://www.codacy.com/app/joaorafaelm/work-at-olist?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=joaorafaelm/work-at-olist&amp;utm_campaign=Badge_Grade) [![Requirements Status](https://requires.io/github/joaorafaelm/work-at-olist/requirements.svg?branch=master)](https://requires.io/github/joaorafaelm/work-at-olist/requirements/?branch=master) [![Code Health](https://landscape.io/github/joaorafaelm/work-at-olist/master/landscape.svg?style=flat)](https://landscape.io/github/joaorafaelm/work-at-olist/master)
 
 
@@ -11,13 +10,11 @@ This is my solution for the test proposed [here](https://github.com/olist/work-a
 * Python 3.6+
 * PostgreSQL
 * Virtualenv
-
+-------------
 #### Environment
--------------
 This project was developed using PyCharm, VIM and Atom Editor, running on macOS Sierra 10.12.
-
-#### Getting Set Up
 -------------
+#### Getting Set Up
 Clone this project and create the virtual environment:
 ~~~~
 $ git clone https://github.com/joaorafaelm/work-at-olist && cd work-at-olist
@@ -44,22 +41,20 @@ You can now go to [http://localhost:8000](http://localhost:8000).
 
 *Run `make help` to show all commands.*
 
-#### Deploying
 -------------
+#### Deploying
 Setup [heroku](https://devcenter.heroku.com/articles/heroku-cli) and run:
 ~~~~
 $ make deploy
 ~~~~
-
-#### Importing categories
 -------------
+#### Importing categories
 To import the csv into the system, run:
 ~~~~
 $ python work-at-olist/manage.py importcategories <marketplace_name> <csv_file>
 ~~~~
-
-#### API documentation
 -------------
+#### API documentation
 ##### Listing all channels
 This endpoint will list all channels registered.
 ~~~~
