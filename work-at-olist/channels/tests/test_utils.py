@@ -18,3 +18,5 @@ class TestUtils(TestCase):
                 getattr(obj, 'attr2')
             ])
         )
+        with self.assertRaises(TypeError):
+            Attrgetter({})(obj)
