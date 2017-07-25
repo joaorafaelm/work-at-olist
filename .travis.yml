@@ -9,6 +9,6 @@ install:
   - pip install -r requirements-local.txt coveralls
 script:
   - tox
-  - coverage run --source=work-at-olist/channels work-at-olist/manage.py test channels
+  - coverage run work-at-olist/manage.py test channels
 after_success:
   - coveralls
